@@ -1,0 +1,132 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: Order processor schema
+
+paths:
+  /order/assign:
+    post:
+      description: Assign order to executor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderAssignRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+
+ /order/cancel:
+    post:
+      description: Cancel order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCancelRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        '403':
+          description: Unable to cancel order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+ /order/acquire:
+    get:
+      description: Acquire order for executor
+      parameters:
+        - $ref: '#/components/parameters/ExecutorID'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcquiredOrderInfo'
+        '400':
+          description: No orders to acquire
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  parameters:
+    ExecutorID:
+      in: query
+      name: executor_id
+      schema:
+        type: string
+        description: Идентификатор исполнителя
+
+  schemas:
+    OrderAssignRequest:
+      type: object
+      required:
+        - order_nr
+        - executor_id
+      properties:
+        order_nr:
+          type: string
+          description: Номер заказа в формате uuid
+        executor_id:
+          type: string
+          description: Идентификатор исполнителя
+
+    OrderCancelRequest:
+      type: object
+      required:
+        - order_nr
+        - executor_id
+        - reason
+      properties:
+        order_nr:
+          type: string
+          description: Номер заказа в формате uuid
+        executor_id:
+          type: string
+          description: Идентификатор исполнителя
+        reason:
+          type: string
+          description: Причина отмены заказа
+
+    Success:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Success!
+
+    Error:
+      type: object
+      required:
+        - message
+        - code
+      properties:
+        message:
+          type: string
+          description: сообщение об ошибке
+        code:
+          type: number
+          format: integer
+          description: Внутренний код ошибки
