@@ -23,7 +23,7 @@ ExecutorInfoClient::ExecutorInfoClient(userver::clients::http::Client& http_clie
 
 std::optional<ExecutorInfo> ExecutorInfoClient::FetchExecutorInfo(const std::string& executor_id) const {
 
-    const std::string url = "http://other-service/api/executor-info?executor_id=" + executor_id;
+    const std::string url = "http://localhost:43101/api/executor-info?executor_id=" + executor_id;
 
     auto response = http_client_.CreateRequest()
                         .get(url)               // GET-запрос
