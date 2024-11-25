@@ -10,4 +10,4 @@ INSERT INTO order_processing.orders (
     cancelled_at,
     cancel_reason
 ) VALUES 
-('order_nr_1', NULL, 'customer_1', 'zone_1', 100.0, NULL, NOW(), NULL, NULL, NULL);
+('order_nr_1', 'executor_id_1', '', '', NULL, NULL, NOW(), NULL, NULL, NULL);
