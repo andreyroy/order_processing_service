@@ -120,7 +120,7 @@ async def test_order_acquire_order_not_found(
     assert response.json()["message"] == "No orders for executor"
 
 
-@pytest.mark.pgsql("order_processing", files=['db_1.sql', 'initial_data.sql'])
+@pytest.mark.pgsql("order_processing", files=['initial_data.sql'])
 async def test_order_acquire_executor_not_found(
     service_client,
     mock_order_info,
