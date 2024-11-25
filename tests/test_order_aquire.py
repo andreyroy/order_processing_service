@@ -69,7 +69,7 @@ def mock_toll_road_info(mockserver):
 
 # Тесты
 
-@pytest.mark.pgsql("order_processing", files=['db_1.sql', 'initial_data.sql'])
+@pytest.mark.pgsql("order_processing", files=['initial_data.sql'])
 async def test_order_acquire_success(
     service_client,
     mock_order_info,
@@ -103,7 +103,7 @@ async def test_order_acquire_bad_request(service_client):
     assert response.json()["message"] == "Missing executor id in query"
 
 
-@pytest.mark.pgsql("order_processing", files=['db_1.sql', 'initial_data.sql'])
+@pytest.mark.pgsql("order_processing", files=['initial_data.sql'])
 async def test_order_acquire_order_not_found(
     service_client,
     mock_order_info,
