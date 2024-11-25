@@ -6,4 +6,4 @@ is-testing: false
 
 server-port: 8080
 
-dbconnection: 'postgresql://order_processing_user:password@localhost:5432/order_processing_db_1'
+dbconnection: 'postgresql://order_processing_user:password@localhost:5432/order_processing_service_db_1'
