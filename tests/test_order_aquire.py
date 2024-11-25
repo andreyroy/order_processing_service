@@ -77,7 +77,7 @@ async def test_order_acquire_success(
     mock_zone_info,
     mock_toll_road_info,
 ):
-    response = await service_client.post(
+    response = await service_client.get(
         "/v1/order/acquire",
         params={"ExecutorID": "executor_id_1"},
     )
@@ -94,7 +94,7 @@ async def test_order_acquire_success(
 
 
 async def test_order_acquire_bad_request(service_client):
-    response = await service_client.post(
+    response = await service_client.get(
         "/v1/order/acquire",
         params={}
     )
@@ -109,7 +109,7 @@ async def test_order_acquire_order_not_found(
     mock_zone_info,
     mock_toll_road_info,
 ):
-    response = await service_client.post(
+    response = await service_client.get(
         "/v1/order/acquire",
         params={"ExecutorID": "executor_id_1"},
     )
@@ -125,7 +125,7 @@ async def test_order_acquire_executor_not_found(
     mock_zone_info,
     mock_toll_road_info,
 ):
-    response = await service_client.post(
+    response = await service_client.get(
         "/v1/order/acquire",
         params={"ExecutorID": "unknown_executor_id"},
     )
