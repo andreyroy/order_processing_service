@@ -26,7 +26,7 @@ def initial_data_path(service_source_dir):
 def pgsql_local(service_source_dir, pgsql_local_create):
     """Create schemas databases for tests"""
     databases = discover.find_schemas(
-        'order_processing',  # service name that goes to the DB connection
+        'order_processing_service',  # service name that goes to the DB connection
         [service_source_dir.joinpath('postgresql/schemas')],
     )
     return pgsql_local_create(list(databases.values()))
