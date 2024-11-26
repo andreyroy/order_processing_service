@@ -12,7 +12,7 @@ def order_acquire_body():
 # Мокируем внешние сервисы: order-info, executor-info, zone-info, toll-road-info
 @pytest.fixture
 def mock_order_info(mockserver):
-    @mockserver.json_handler("/api/order-info")
+    @mockserver.json_handler("other-service/api/order-info")
     async def handler(request):
         order_id = request.args["order_id"]
         if order_id == "order_nr_1":
@@ -27,7 +27,7 @@ def mock_order_info(mockserver):
 
 @pytest.fixture
 def mock_executor_info(mockserver):
-    @mockserver.json_handler("/api/executor-info")
+    @mockserver.json_handler("other-service/api/executor-info")
     async def handler(request):
         executor_id = request.args["executor_id"]
         if executor_id == "executor_id_1":
@@ -41,7 +41,7 @@ def mock_executor_info(mockserver):
 
 @pytest.fixture
 def mock_zone_info(mockserver):
-    @mockserver.json_handler("/api/zone-info")
+    @mockserver.json_handler("other-service/api/zone-info")
     async def handler(request):
         zone_id = request.args["zone_id"]
         if zone_id == "zone_1":
@@ -55,7 +55,7 @@ def mock_zone_info(mockserver):
 
 @pytest.fixture
 def mock_toll_road_info(mockserver):
-    @mockserver.json_handler("/api/toll-road-info")
+    @mockserver.json_handler("other-service/api/toll-road-info")
     async def handler(request):
         zone_id = request.args["zone_id"]
         if zone_id == "zone_1":
