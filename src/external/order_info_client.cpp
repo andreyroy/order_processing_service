@@ -24,7 +24,7 @@ OrderInfoClient::OrderInfoClient(userver::clients::http::Client& http_client)
 
 
 std::optional<OrderInfo> OrderInfoClient::FetchOrderInfo(const std::string& order_id) const {
-    const std::string url = "http://localhost:43101/api/order-info?order_id=" + order_id;
+    const std::string url = "http://other-service/api/order-info?order_id=" + order_id;
 
     auto response = http_client_.CreateRequest()
                         .get(url)               // GET-запрос

@@ -30,3 +30,9 @@ def pgsql_local(service_source_dir, pgsql_local_create):
         [service_source_dir.joinpath('postgresql/schemas')],
     )
     return pgsql_local_create(list(databases.values()))
+
+@pytest.fixture(scope="session")
+def service_testsuite_config(service_testsuite_config):
+    # Разрешаем запросы к http://other-service с использованием MockServer
+    service_testsuite_config["http_allowed_urls"] = ["http://other-service"]
+    return service_testsuite_config

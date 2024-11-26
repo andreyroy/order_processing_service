@@ -21,7 +21,7 @@ ZoneInfoClient::ZoneInfoClient(userver::clients::http::Client& http_client)
     : http_client_(http_client) {}
 
 std::optional<ZoneInfo> ZoneInfoClient::FetchZoneInfo(const std::string& zone_id) const {
-    const std::string url = "http://localhost:43101/api/zone-info?zone_id=" + zone_id;
+    const std::string url = "http://other-service/api/zone-info?zone_id=" + zone_id;
 
     auto response = http_client_.CreateRequest()
                         .get(url)               // GET-запрос

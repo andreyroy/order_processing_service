@@ -23,7 +23,7 @@ TollRoadInfoClient::TollRoadInfoClient(userver::clients::http::Client& http_clie
 
 std::optional<TollRoadInfo> TollRoadInfoClient::FetchTollRoadInfo(const std::string& zone_id) const {
 
-    const std::string url = "http://localhost:43101/api/toll-road-info?zone_id=" + zone_id;
+    const std::string url = "http://other-service/api/toll-road-info?zone_id=" + zone_id;
 
 
     auto response = http_client_.CreateRequest()
