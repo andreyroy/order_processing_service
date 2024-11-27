@@ -5,8 +5,11 @@
 
 #include <userver/components/component.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
+#include <userver/clients/http/component.hpp>
+#include <userver/clients/http/client.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
+#include <userver/formats/json.hpp>
 
 namespace handlers::order::acquire {
 
@@ -20,7 +23,10 @@ class Handler final : public userver::server::handlers::HttpHandlerBase {
         pg_cluster_(
             component_context
                 .FindComponent<userver::components::Postgres>("postgres-db-1")
-                .GetCluster()) {}
+                .GetCluster()),
+        http_client_(
+            component_context
+                .FindComponent<userver::components::HttpClient>().GetHttpClient()) {}
 
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
@@ -28,6 +34,7 @@ class Handler final : public userver::server::handlers::HttpHandlerBase {
 
  private:
   userver::storages::postgres::ClusterPtr pg_cluster_;
+  userver::clients::http::Client& http_client_;
 };
 
 }  // namespace handlers::order::acquire

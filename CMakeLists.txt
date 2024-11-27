@@ -1,4 +1,9 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.20)
+
+
+set(CMAKE_CXX_STANDARD 20)  # Или 20 для C++20
+set(CMAKE_CXX_STANDARD_REQUIRED ON) 
+set(CMAKE_CXX_EXTENSIONS OFF)
 project(order_processing CXX)
 
 
@@ -32,6 +37,10 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/handlers/order_assign/handler.cpp
     src/handlers/order_acquire/handler.cpp
     src/handlers/order_acquire/handler.cpp
+    src/external/order_info_client.cpp
+    src/external/executor_info_client.cpp
+    src/external/zone_info_client.cpp
+    src/external/toll_road_info_client.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
