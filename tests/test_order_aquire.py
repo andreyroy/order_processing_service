@@ -9,7 +9,8 @@
 #     }
 
 
-# # Мокируем внешние сервисы: order-info, executor-info, zone-info, toll-road-info
+# # Мокируем внешние сервисы: order-info, executor-info, zone-info,
+# toll-road-info
 # @pytest.fixture
 # def mock_order_info(mockserver):
 #     @mockserver.json_handler("/api/order-info")
@@ -134,4 +135,5 @@
 #     )
 
 #     assert response.status == 404
-#     assert response.json()["message"] == "Executor info not found for executor_id: unknown_executor_id"
+#     assert response.json()["message"] == "Executor info not found for executor_id: 
+# unknown_executor_id"
